@@ -3,7 +3,8 @@
 // Library/Code is from http://spatial.litesolutions.net
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
-namespace osm2mssql.Importer.OsmReader.Protobuf {
+namespace osm2mssql.Importer.OsmReader.Protobuf
+{
 	/// <summary>
 	/// Defines possible types of the relation member.
 	/// </summary>

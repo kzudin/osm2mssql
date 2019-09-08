@@ -6,7 +6,7 @@ using osm2mssql.Importer.OpenStreetMapTypes;
 
 namespace osm2mssql.Importer.OsmReader
 {
-    public class XmlOsmReader : IOsmReader
+	public class XmlOsmReader : IOsmReader
     {
         public IEnumerable<Relation> ReadRelations(string fileName, AttributeRegistry attributeRegistry)
         {

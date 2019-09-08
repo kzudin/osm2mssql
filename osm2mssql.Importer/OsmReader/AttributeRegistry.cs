@@ -5,7 +5,7 @@ using osm2mssql.Importer.OpenStreetMapTypes;
 
 namespace osm2mssql.Importer.OsmReader
 {
-    public class AttributeRegistry
+	public class AttributeRegistry
     {
         public AttributeRegistry()
         {

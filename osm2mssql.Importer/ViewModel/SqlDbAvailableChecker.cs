@@ -1,14 +1,10 @@
-﻿using osm2mssql.Importer.Enums;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
+﻿using System.Data.SqlClient;
 using System.Threading.Tasks;
+using osm2mssql.Importer.Enums;
 
 namespace osm2mssql.Importer.ViewModel
 {
-    class SqlDbAvailableChecker
+	class SqlDbAvailableChecker
     {
         internal async Task<ConnectionResult> CheckDatabaseAvailability(System.Data.SqlClient.SqlConnectionStringBuilder sqlConnectionStringBuilder)
         {

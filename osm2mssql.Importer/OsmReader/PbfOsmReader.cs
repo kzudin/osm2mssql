@@ -9,7 +9,7 @@ using ProtoBuf;
 
 namespace osm2mssql.Importer.OsmReader
 {
-    public class PbfOsmReader : IOsmReader
+	public class PbfOsmReader : IOsmReader
     {
         public const int MaxDataBlockSize = 32 * 1024 * 1024;
         public const int MaxHeaderBlockSize = 64 * 1024;

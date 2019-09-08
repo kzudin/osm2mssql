@@ -7,7 +7,8 @@
 using System;
 using ProtoBuf;
 
-namespace osm2mssql.Importer.OsmReader.Protobuf {
+namespace osm2mssql.Importer.OsmReader.Protobuf
+{
 	/// <summary>
 	/// Represents header of the fileblock.
 	/// </summary>

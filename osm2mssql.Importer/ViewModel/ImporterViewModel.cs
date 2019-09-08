@@ -1,32 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data.SqlClient;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.ServiceModel;
-using System.ServiceModel.Activation;
-using System.ServiceModel.Description;
-using System.ServiceModel.Web;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Routing;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
-using System.Xml.Serialization;
 using Microsoft.Win32;
 using osm2mssql.Importer.Classes;
 using osm2mssql.Importer.Enums;
-using osm2mssql.Importer.Languages;
 using osm2mssql.Importer.Model;
 using osm2mssql.Importer.Tasks;
 
 namespace osm2mssql.Importer.ViewModel
 {
-    public class ImporterViewModel : ViewModelBase
+	public class ImporterViewModel : ViewModelBase
     {
         public ICommand TryToConnect { get { return new RelayCommand(TryConnectingToDatabase); } }
         public ICommand StartImport { get { return new RelayCommand(StartImporting); } }

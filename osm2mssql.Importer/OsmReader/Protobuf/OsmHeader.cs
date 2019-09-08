@@ -8,7 +8,8 @@ using System;
 using System.Collections.Generic;
 using ProtoBuf;
 
-namespace osm2mssql.Importer.OsmReader.Protobuf {
+namespace osm2mssql.Importer.OsmReader.Protobuf
+{
 	/// <summary>
 	/// Represents header message of the PBF file.
 	/// </summary>

@@ -9,7 +9,8 @@ using System.Collections.Generic;
 using System.Text;
 using ProtoBuf;
 
-namespace osm2mssql.Importer.OsmReader.Protobuf {
+namespace osm2mssql.Importer.OsmReader.Protobuf
+{
 	/// <summary>
 	/// Stores all strings for Primitive block.
 	/// </summary>

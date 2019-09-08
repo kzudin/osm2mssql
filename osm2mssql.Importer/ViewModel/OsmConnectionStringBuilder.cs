@@ -1,13 +1,9 @@
-﻿using osm2mssql.Importer.Model;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
+﻿using System.Data.SqlClient;
+using osm2mssql.Importer.Model;
 
 namespace osm2mssql.Importer.ViewModel
 {
-    internal class OsmConnectionStringBuilder
+	internal class OsmConnectionStringBuilder
     {
         internal SqlConnectionStringBuilder CreateSqlConnectionStringBuilder(ImporterModel model)
         {

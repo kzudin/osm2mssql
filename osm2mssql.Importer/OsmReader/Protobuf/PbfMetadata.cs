@@ -7,7 +7,8 @@
 using System;
 using ProtoBuf;
 
-namespace osm2mssql.Importer.OsmReader.Protobuf {
+namespace osm2mssql.Importer.OsmReader.Protobuf
+{
 	/// <summary>
 	/// Represetns data transfer object used by PBF serializer for Entity metadata.
 	/// </summary>

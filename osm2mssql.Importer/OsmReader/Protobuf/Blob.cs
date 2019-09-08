@@ -7,12 +7,14 @@
 using System;
 using ProtoBuf;
 
-namespace osm2mssql.Importer.OsmReader.Protobuf {
+namespace osm2mssql.Importer.OsmReader.Protobuf
+{
 	/// <summary>
 	/// Represents content of the file block.
 	/// </summary>
 	[Serializable, ProtoContract]
-	internal class Blob {
+	internal class Blob
+	{
 		#region Public Properties
 
 		/// <summary>

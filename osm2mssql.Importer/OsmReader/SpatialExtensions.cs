@@ -5,7 +5,7 @@ using osm2mssql.Importer.OpenStreetMapTypes;
 
 namespace osm2mssql.Importer.OsmReader
 {
-    public static class SpatialExtensions
+	public static class SpatialExtensions
     {
         public static SqlGeography ToSqlGeographyPoint(this Node node)
         {
