@@ -1,0 +1,2 @@
+﻿CREATE SPATIAL INDEX [GX_tNode] ON [dbo].[tNode] ([Location]) USING GEOGRAPHY_AUTO_GRID;
+GO

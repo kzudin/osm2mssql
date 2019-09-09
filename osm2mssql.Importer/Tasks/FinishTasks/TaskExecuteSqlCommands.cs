@@ -2,9 +2,9 @@
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using osm2mssql.Importer.Enums;
 using osm2mssql.Importer.OsmReader;
 using osm2mssql.Importer.Properties;
-using osm2mssql.Importer.Tasks.ParallelFinishTask;
 
 namespace osm2mssql.Importer.Tasks.FinishTasks
 {
@@ -23,6 +23,11 @@ namespace osm2mssql.Importer.Tasks.FinishTasks
 		}
 		private void ExecuteFolderScript(string folder)
 		{
+			if (!Directory.Exists(folder))
+			{
+				Trace.TraceWarning("Directory {0} with sql files not exists", folder);
+				return;
+			}
 			var changeFiles = Directory.GetFiles(folder, "*.sql");
 			Array.Sort(changeFiles);
 			foreach (var file in changeFiles)

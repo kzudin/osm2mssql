@@ -1,8 +1,8 @@
 ﻿using System.Data;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using osm2mssql.Importer.Enums;
 using osm2mssql.Importer.OsmReader;
-using osm2mssql.Importer.Tasks.ParallelFinishTask;
 
 namespace osm2mssql.Importer.Tasks.ParallelTask
 {
@@ -24,18 +24,18 @@ namespace osm2mssql.Importer.Tasks.ParallelTask
 		protected override Task DoTaskWork(string osmFile, AttributeRegistry attributeRegistry)
 		{
 			var watch = Stopwatch.StartNew();
-			ExecuteSqlCmd("TRUNCATE TABLE WayCreation");
-			ExecuteSqlCmd("TRUNCATE TABLE WayTag");
+			ExecuteSqlCmd("TRUNCATE TABLE [dbo].[tWayCreation]");
+			ExecuteSqlCmd("TRUNCATE TABLE [dbo].[tWayTag]");
 
 			var dWays = new DataTable();
-			dWays.TableName = "WayCreation";
+			dWays.TableName = "tWayCreation";
 			dWays.MinimumCapacity = MaxRowCountInMemory;
 			dWays.Columns.Add("wayId", typeof(long));
 			dWays.Columns.Add("nodeId", typeof(long));
 			dWays.Columns.Add("sort");
 
 			var dWayTags = new DataTable();
-			dWayTags.TableName = "WayTag";
+			dWayTags.TableName = "tWayTag";
 			dWayTags.MinimumCapacity = MaxRowCountInMemory;
 			dWayTags.Columns.Add("WayId", typeof(long));
 			dWayTags.Columns.Add("Typ", typeof(int));

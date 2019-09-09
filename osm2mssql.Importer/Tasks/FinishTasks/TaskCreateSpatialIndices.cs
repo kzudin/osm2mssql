@@ -1,6 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
+using osm2mssql.Importer.Enums;
 using osm2mssql.Importer.OsmReader;
-using osm2mssql.Importer.Tasks.ParallelFinishTask;
 
 namespace osm2mssql.Importer.Tasks.FinishTasks
 {
@@ -12,8 +13,12 @@ namespace osm2mssql.Importer.Tasks.FinishTasks
 
 		protected override Task DoTaskWork(string osmFile, AttributeRegistry attributeRegistry)
 		{
-			var task1 = Task.Factory.StartNew(() => ExecuteSqlCmd("CREATE SPATIAL INDEX idx ON Way(line) USING GEOGRAPHY_AUTO_GRID"));
-			var task2 = Task.Factory.StartNew(() => ExecuteSqlCmd("CREATE SPATIAL INDEX idx ON Node(location) USING GEOGRAPHY_AUTO_GRID"));
+			var task1 = Task.Run(() => ExecuteSqlCmd(File
+				.ReadAllText($@"SQL\{GetType().Name}Way.sql")
+				.Replace("[OSM]", Connection.InitialCatalog)));
+			var task2 = Task.Run(() => ExecuteSqlCmd(File
+				.ReadAllText($@"SQL\{GetType().Name}Node.sql")
+				.Replace("[OSM]", Connection.InitialCatalog)));
 			return Task.WhenAll(new[] { task1, task2 });
 		}
 	}

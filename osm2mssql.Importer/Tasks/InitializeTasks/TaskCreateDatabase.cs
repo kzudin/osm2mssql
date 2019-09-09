@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
+using osm2mssql.Importer.Enums;
 using osm2mssql.Importer.OsmReader;
-using osm2mssql.Importer.Tasks.ParallelFinishTask;
 
 namespace osm2mssql.Importer.Tasks.InitializeTasks
 {

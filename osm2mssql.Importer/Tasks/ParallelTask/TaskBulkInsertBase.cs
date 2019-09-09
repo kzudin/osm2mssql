@@ -2,8 +2,8 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using osm2mssql.Importer.Enums;
 using osm2mssql.Importer.Properties;
-using osm2mssql.Importer.Tasks.ParallelFinishTask;
 
 namespace osm2mssql.Importer.Tasks.ParallelTask
 {

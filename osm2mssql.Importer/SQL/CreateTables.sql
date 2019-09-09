@@ -1,66 +1,67 @@
-use [OSM];
+﻿USE [OSM];
 
-CREATE TABLE [WayCreation]	(
-	wayId bigint NOT NULL,
-	nodeId bigint NOT NULL,
-	sort int NOT NULL
-);
-
-CREATE TABLE [Way] (
-	[Id] bigint NOT NULL,
-	[line] [geography] NULL
-);
-
-CREATE TABLE [WayTag] (
-	[WayId] bigint NOT NULL,
-	[Typ] [int] NOT NULL,
-	[Info] [nvarchar](max) NOT NULL
-);
-
-CREATE TABLE [Node](
-	[Id] bigint NOT NULL,
-	[location] [geography] NOT NULL,
-	[Latitude] [float] NOT NULL,
-	[Longitude] [float] NOT NULL,
-);
-
-CREATE TABLE [NodeTag](
+CREATE TABLE [dbo].[tWayCreation]
+(
+	[WayId]  bigint NOT NULL,
 	[NodeId] bigint NOT NULL,
-	[Typ] [int] NOT NULL,
-	[Info] [nvarchar](1000) NOT NULL
+	[Sort]   int    NOT NULL
 );
-
-create table [TagType] (
-	[Typ] [int] not null,
-	[Name] nvarchar(255)		
-)
-
-CREATE TABLE [RelationCreation]	(
-	RelationId bigint NOT NULL,
-	[ref] bigint NOT NULL,
-	[type] int not null,
-	[role] int not null,
-	sort int NOT NULL,
+CREATE TABLE [dbo].[tWay]
+(
+	[Id]   bigint    NOT NULL,
+	[line] geography     NULL
 );
-
-CREATE TABLE [Relation] (
-	[id] bigint NOT NULL,
-	[geo] [geography] NULL	 ,	
-	[role] int not null,
+CREATE TABLE [dbo].[tWayTag]
+(
+	[WayId] bigint        NOT NULL,
+	[Typ]   int           NOT NULL,
+	[Info]  nvarchar(max) NOT NULL
 );
-
-CREATE TABLE [RelationTag] (
+CREATE TABLE [dbo].[tNode]
+(
+	[Id]        bigint    NOT NULL,
+	[Location]  geography NOT NULL,
+	[Latitude]  float     NOT NULL,
+	[Longitude] float     NOT NULL
+);
+CREATE TABLE [dbo].[tNodeTag]
+(
+	[NodeId] bigint         NOT NULL,
+	[Typ]    int            NOT NULL,
+	[Info]   nvarchar(1000) NOT NULL
+);
+CREATE TABLE [dbo].[tTagType]
+(
+	[Typ]  int           NOT NULL CONSTRAINT [PK_tTagType] PRIMARY KEY CLUSTERED,
+	[Name] nvarchar(255)     NULL
+);
+CREATE TABLE [dbo].[tRelationCreation]
+(
 	[RelationId] bigint NOT NULL,
-	[Typ] [int] NOT NULL,
-	[Info] [nvarchar](max) NOT NULL
+	[Ref]        bigint NOT NULL,
+	[Type]       int    NOT NULL,
+	[Role]       int    NOT NULL,
+	[Sort]       int    NOT NULL
 );
-
-create table [MemberType] (
-	[id] [int] not null constraint PK_MemberType_Id primary key clustered,
-	[Name] nvarchar(255)		
-)
-
-create table [MemberRole] (
-	[id] [int] not null constraint PK_MemberRole_Id primary key clustered,
-	[Name] nvarchar(255)		
-)
+CREATE TABLE [dbo].[tRelation]
+(
+	[Id]   bigint    NOT NULL,
+	[Geo]  geography     NULL,
+	[Role] int       NOT NULL
+);
+CREATE TABLE [dbo].[tRelationTag]
+(
+	[RelationId] bigint        NOT NULL,
+	[Typ]        int           NOT NULL,
+	[Info]       nvarchar(max) NOT NULL
+);
+CREATE TABLE [dbo].[tMemberType]
+(
+	[Id]   int           NOT NULL CONSTRAINT [PK_tMemberType_Id] PRIMARY KEY CLUSTERED,
+	[Name] nvarchar(255)     NULL
+);
+CREATE TABLE [dbo].[tMemberRole]
+(
+	[Id]   int           NOT NULL CONSTRAINT [PK_tMemberRole_Id] PRIMARY KEY CLUSTERED,
+	[Name] nvarchar(255)     NULL
+);

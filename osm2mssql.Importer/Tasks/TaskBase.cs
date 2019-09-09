@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using osm2mssql.Importer.Enums;
 using osm2mssql.Importer.OsmReader;
 using osm2mssql.Importer.Properties;
-using osm2mssql.Importer.Tasks.ParallelFinishTask;
 
 namespace osm2mssql.Importer.Tasks
 {
@@ -91,11 +92,9 @@ namespace osm2mssql.Importer.Tasks
 		/// <param name="sqlCommand">SqlCommand</param>
 		protected void ExecuteSqlCmd(string sqlCommand)
 		{
-			var sqlCommands = sqlCommand.Split(
-				new[]
-					{
-						"GO"
-					}, StringSplitOptions.RemoveEmptyEntries);
+			var sqlCommands = Regex.Split(sqlCommand, @"[\s+|;|\n|\r]go(?:\s+|$)", RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.IgnoreCase)
+				.Where(c => !string.IsNullOrWhiteSpace(c))
+				.ToArray();
 
 			using (var con = new SqlConnection(Connection.ToString()))
 			{

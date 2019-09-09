@@ -1,8 +1,8 @@
 ﻿using System.Data;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using osm2mssql.Importer.Enums;
 using osm2mssql.Importer.OsmReader;
-using osm2mssql.Importer.Tasks.ParallelFinishTask;
 
 namespace osm2mssql.Importer.Tasks.ParallelTask
 {
@@ -21,24 +21,24 @@ namespace osm2mssql.Importer.Tasks.ParallelTask
 
 		protected override Task DoTaskWork(string osmFile, AttributeRegistry attributeRegistry)
 		{
-			var reader = osmFile.EndsWith(".pbf") ?
-													(IOsmReader)new PbfOsmReader() :
-													(IOsmReader)new XmlOsmReader();
+			var reader = osmFile.EndsWith(".pbf")
+				? (IOsmReader)new PbfOsmReader()
+				: (IOsmReader)new XmlOsmReader();
 
-			ExecuteSqlCmd("TRUNCATE TABLE [RelationCreation]");
-			ExecuteSqlCmd("TRUNCATE TABLE [RelationTag]");
+			ExecuteSqlCmd("TRUNCATE TABLE [dbo].[tRelationCreation]");
+			ExecuteSqlCmd("TRUNCATE TABLE [dbo].[tRelationTag]");
 
 			var dRelationCreation = new DataTable { MinimumCapacity = MaxRowCountInMemory };
-			dRelationCreation.TableName = "RelationCreation";
-			dRelationCreation.Columns.Add("relationId", typeof(long));
-			dRelationCreation.Columns.Add("ref", typeof(long));
-			dRelationCreation.Columns.Add("type");
-			dRelationCreation.Columns.Add("role");
-			dRelationCreation.Columns.Add("sort");
+			dRelationCreation.TableName = "tRelationCreation";
+			dRelationCreation.Columns.Add("RelationId", typeof(long));
+			dRelationCreation.Columns.Add("Ref",        typeof(long));
+			dRelationCreation.Columns.Add("Type");
+			dRelationCreation.Columns.Add("Role");
+			dRelationCreation.Columns.Add("Sort");
 
 			var dRelationTags = new DataTable { MinimumCapacity = MaxRowCountInMemory };
-			dRelationTags.TableName = "RelationTag";
-			dRelationTags.Columns.Add("relationId", typeof(long));
+			dRelationTags.TableName = "tRelationTag";
+			dRelationTags.Columns.Add("RelationId", typeof(long));
 			dRelationTags.Columns.Add("Typ");
 			dRelationTags.Columns.Add("Info");
 
