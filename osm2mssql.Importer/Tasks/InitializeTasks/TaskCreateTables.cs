@@ -4,11 +4,11 @@ using osm2mssql.Importer.OsmReader;
 
 namespace osm2mssql.Importer.Tasks.InitializeTasks
 {
-	public class TaskCreateDatabase : TaskBase
+	public class TaskCreateTables : TaskBase
 	{
 		private string _database;
 		private string _osmFile;
-		public TaskCreateDatabase(string name) : base(TaskType.InitializeTask, name)
+		public TaskCreateTables(string name) : base(TaskType.InitializeTask, name)
 		{
 		}
 		protected override async Task DoTaskWork(string osmFile, AttributeRegistry attributeRegistry)
@@ -19,17 +19,18 @@ namespace osm2mssql.Importer.Tasks.InitializeTasks
 				_osmFile = osmFile;
 				Connection.InitialCatalog = string.Empty;
 
-				CreateDatabase();
+				CreateTables();
 
 				Connection.InitialCatalog = _database;
 			});
 		}
-		internal void CreateDatabase()
+		internal void CreateTables()
 		{
-			StepDescription = "Creating database...";
-			var createSql = App.GetResourceFileText("osm2mssql.Importer.SQL.CreateDatabase.sql");
-			createSql = createSql.Replace("[OSM]", _database);
-			ExecuteSqlCmd(createSql);            
+			var createTables = App.GetResourceFileText("osm2mssql.Importer.SQL.CreateTables.sql");
+			StepDescription = "Creating tables...";
+			createTables = createTables.Replace("[OSM]", _database);
+			ExecuteSqlCmd("ALTER DATABASE " + _database + " SET trustworthy ON");
+			ExecuteSqlCmd(createTables);
 		}
 	}
 }

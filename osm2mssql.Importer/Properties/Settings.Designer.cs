@@ -25,7 +25,7 @@ namespace osm2mssql.Importer.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("50000")]
         public int MaxRowCountInMemory {
             get {
                 return ((int)(this["MaxRowCountInMemory"]));
@@ -45,7 +45,7 @@ namespace osm2mssql.Importer.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>Changes</string>\r\n  <string>Procedures</string>\r\n</ArrayOfString>")]
+            "tring>SQL\\Changes</string>\r\n  <string>SQL\\Procedures</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection SqlDirs {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["SqlDirs"]));

@@ -7,7 +7,7 @@ namespace osm2mssql.Importer.Tasks.FinishTasks
 {
 	public class TaskCreateSpatialIndices : TaskBase
 	{
-		public TaskCreateSpatialIndices(string name) : base(TaskType.FinishTask, name)
+		public TaskCreateSpatialIndices(string name) : base(TaskType.InitializeTask, name)
 		{
 		}
 

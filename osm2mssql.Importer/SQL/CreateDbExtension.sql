@@ -1,30 +1,30 @@
-﻿exec sp_configure 'show advanced options', 1;
+﻿EXEC sp_configure 'show advanced options', 1;
 RECONFIGURE;
-exec sp_configure 'clr enabled', 1;
+EXEC sp_configure 'clr enabled', 1;
 RECONFIGURE;
 GO
-use [OSM];
+USE [OSM];
 GO
-if exists (select * from sys.objects where name = 'CreateLineString')
-	drop aggregate dbo.CreateLineString;
+IF EXISTS (SELECT * FROM sys.objects WHERE [name] = 'CreateLineString')
+	DROP AGGREGATE [dbo].[CreateLineString];
 GO
-if exists (select * from sys.objects where name = 'GeographyUnion')
-	drop aggregate dbo.GeographyUnion;
+IF EXISTS (SELECT * FROM sys.objects WHERE [name] = 'GeographyUnion')
+	DROP AGGREGATE [dbo].[GeographyUnion];
 GO
-if exists (select * from sys.objects where name = 'ConvertToPolygon')
-	drop function dbo.ConvertToPolygon;
+IF EXISTS (SELECT * FROM sys.objects WHERE [name] = 'ConvertToPolygon')
+	DROP FUNCTION [dbo].[ConvertToPolygon];
 GO
-if exists (select * from sys.assemblies where name = 'osm2mssqlSqlExtension')
-	drop assembly osm2mssqlSqlExtension;
+IF EXISTS (SELECT * FROM sys.assemblies WHERE [name] = 'osm2mssqlSqlExtension')
+	DROP ASSEMBLY osm2mssqlSqlExtension;
 GO
-create assembly osm2mssqlSqlExtension FROM [DllExtension] WITH PERMISSION_SET = UNSAFE;
+CREATE ASSEMBLY osm2mssqlSqlExtension FROM [DllExtension] WITH PERMISSION_SET = UNSAFE;
 GO
-create aggregate dbo.CreateLineString(@lat float,@lon float,@sort int) returns geography
-	external name osm2mssqlSqlExtension.[osm2mssql.DbExtensions.LineStringBuilder];
+CREATE AGGREGATE dbo.CreateLineString(@lat float,@lon float,@sort int) RETURNS geography
+	EXTERNAL NAME osm2mssqlSqlExtension.[osm2mssql.DbExtensions.LineStringBuilder];
 GO
-create aggregate dbo.GeographyUnion(@geo geography) returns geography
-	external name osm2mssqlSqlExtension.[osm2mssql.DbExtensions.GeographyUnion];
+CREATE AGGREGATE dbo.GeographyUnion(@geo geography) RETURNS geography
+	EXTERNAL NAME osm2mssqlSqlExtension.[osm2mssql.DbExtensions.GeographyUnion];
 GO
-create function dbo.ConvertToPolygon(@geo geography) returns geography 
-	external name [osm2mssqlSqlExtension].[osm2mssql.DbExtensions.Functions].ConvertToPolygon;
+CREATE FUNCTION dbo.ConvertToPolygon(@geo geography) RETURNS geography
+	EXTERNAL NAME [osm2mssqlSqlExtension].[osm2mssql.DbExtensions.Functions].ConvertToPolygon;
 GO

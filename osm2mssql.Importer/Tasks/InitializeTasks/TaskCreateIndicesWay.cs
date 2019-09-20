@@ -7,7 +7,7 @@ namespace osm2mssql.Importer.Tasks.ParallelFinishTask
 {
 	class TaskCreateIndicesWay : TaskBase
 	{
-		public TaskCreateIndicesWay(string name) : base(TaskType.ParallelFinishTask, name)
+		public TaskCreateIndicesWay(string name) : base(TaskType.InitializeTask, name)
 		{
 		}
 		protected override async Task DoTaskWork(string osmFile, AttributeRegistry attributeRegistry)

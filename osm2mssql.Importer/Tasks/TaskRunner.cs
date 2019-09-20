@@ -19,8 +19,8 @@ namespace osm2mssql.Importer.Tasks
 {
 	public class TaskRunner : IDisposable
 	{
-		public ObservableCollection<TaskBase> Tasks { get { return _tasks; } }
-		private readonly ObservableCollection<TaskBase> _tasks = new ObservableCollection<TaskBase>();
+		public ObservableCollection<TaskBase> Tasks { get; } = new ObservableCollection<TaskBase>();
+
 		private Timer _timer;
 
 		public TaskRunner()
@@ -43,22 +43,21 @@ namespace osm2mssql.Importer.Tasks
 		{
 			Tasks.Clear();
 			Tasks.Add(new TaskCreateDatabase        (Language.CurrentLanguage[typeof(TaskCreateDatabase)       .Name]));
+			Tasks.Add(new TaskCreateTables          (Language.CurrentLanguage[typeof(TaskCreateTables)         .Name]));
 			Tasks.Add(new TaskInstallDbExtension    (Language.CurrentLanguage[typeof(TaskInstallDbExtension)   .Name]));
+			Tasks.Add(new TaskCreateIndicesNode     (Language.CurrentLanguage[typeof(TaskCreateIndicesNode)    .Name]));
+			Tasks.Add(new TaskCreateIndicesWay      (Language.CurrentLanguage[typeof(TaskCreateIndicesWay)     .Name]));
+			Tasks.Add(new TaskCreateIndicesRelation (Language.CurrentLanguage[typeof(TaskCreateIndicesRelation).Name]));
+			Tasks.Add(new TaskCreateSpatialIndices  (Language.CurrentLanguage[typeof(TaskCreateSpatialIndices) .Name]));
 
 			Tasks.Add(new TaskNodeReader            (Language.CurrentLanguage[typeof(TaskNodeReader)           .Name]));
 			Tasks.Add(new TaskWayReader             (Language.CurrentLanguage[typeof(TaskWayReader)            .Name]));
 			Tasks.Add(new TaskRelationReader        (Language.CurrentLanguage[typeof(TaskRelationReader)       .Name]));
 
-			Tasks.Add(new TaskCreateIndicesNode     (Language.CurrentLanguage[typeof(TaskCreateIndicesNode)    .Name]));
-			Tasks.Add(new TaskCreateIndicesWay      (Language.CurrentLanguage[typeof(TaskCreateIndicesWay)     .Name]));
-			Tasks.Add(new TaskCreateIndicesRelation (Language.CurrentLanguage[typeof(TaskCreateIndicesRelation).Name]));
-
 			Tasks.Add(new TaskAttributeWriter       (Language.CurrentLanguage[typeof(TaskAttributeWriter)      .Name]));
 
 			Tasks.Add(new TaskClearAndFillWays      (Language.CurrentLanguage[typeof(TaskClearAndFillWays)     .Name]));
 			Tasks.Add(new TaskClearAndFillRelations (Language.CurrentLanguage[typeof(TaskClearAndFillRelations).Name]));
-			Tasks.Add(new TaskCreateSpatialIndices  (Language.CurrentLanguage[typeof(TaskCreateSpatialIndices) .Name]));
-
 			Tasks.Add(new TaskExecuteSqlCommands    (Language.CurrentLanguage[typeof(TaskExecuteSqlCommands)   .Name]));
 		}
 
@@ -82,7 +81,7 @@ namespace osm2mssql.Importer.Tasks
 			///////////////////////////////////////////////////
 			RunTasksSynchron(Tasks.Where(d => d.IsEnabled && d.Type == TaskType.FinishTask), connectionStringBuilder, fileName, attributeRegistry);
 			///////////////////////////////////////////////////
-			var processSummary = string.Format("Totalduration: {0}", watch.Elapsed);
+			var processSummary = string.Format("Total duration: {0}", watch.Elapsed);
 			Trace.WriteLine(processSummary);
 		}
 

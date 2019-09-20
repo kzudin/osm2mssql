@@ -7,8 +7,7 @@ namespace osm2mssql.Importer.Tasks.ParallelFinishTask
 {
 	class TaskCreateIndicesRelation : TaskBase
 	{
-		public TaskCreateIndicesRelation(string name)
-			: base(TaskType.ParallelFinishTask, name)
+		public TaskCreateIndicesRelation(string name) : base(TaskType.InitializeTask, name)
 		{
 		}
 

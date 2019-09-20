@@ -15,8 +15,9 @@
 	<system:String x:Key="Start">Start</system:String>
 	<system:String x:Key="Stop">Stop</system:String>
 
-	<system:String x:Key="TaskCreateDatabase">Creates the database structure</system:String>
+	<system:String x:Key="TaskCreateDatabase">Creates the database</system:String>
 	<system:String x:Key="TaskInstallDbExtension">Install database-extensions</system:String>
+	<system:String x:Key="TaskCreateTables">Creates the tables structure</system:String>
 	<system:String x:Key="TaskNodeReader">Read all nodes</system:String>
 	<system:String x:Key="TaskAttributeWriter">Write Tags</system:String>
 	<system:String x:Key="TaskWayReader">Read all ways</system:String>
